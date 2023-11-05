@@ -4,7 +4,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(markdown-mode python-mode corfu go-mode which-key wgrep vterm undo-tree smex magit ligature evil-surround evil-commentary evil-collection autothemer)))
+   '(company lsp-mode treemacs-evil treemacs highlight-indent-guides markdown-mode python-mode go-mode which-key wgrep vterm undo-tree smex magit ligature evil-surround evil-commentary evil-collection autothemer)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -21,10 +21,12 @@
 (if (daemonp)
     (add-hook 'after-make-frame-functions
 			  (lambda (frame)
-				(set-frame-parameter frame 'alphe-background 60)
+				(set-frame-parameter frame 'alpha-background 60)
 				(with-selected-frame frame
 				  (madie/set-font-faces))))
   (madie/set-font-faces))
+
+(global-set-key (kbd "M-&") 'with-editor-async-shell-command)
 
 (setq default-frame-alist '((undecorated . t)))
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
@@ -91,8 +93,7 @@
 (use-package smex
   :ensure t
   :config
-  (global-set-key (kbd "M-x") 'smex)
-  (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command))
+  (global-set-key (kbd "M-x") 'smex))
 
 (use-package magit
   :ensure t)
