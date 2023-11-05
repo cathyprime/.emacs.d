@@ -135,51 +135,43 @@
 (use-package wgrep
   :ensure t)
 
+(use-package treemacs
+  :ensure t)
+
+(use-package treemacs-evil
+  :ensure t)
+
+(use-package lsp-mode
+  :ensure t
+  :bind (:map lsp-mode-map
+			  ("C-c l" . lsp-command-map)
+			  ("C-c d" . lsp-describe-thing-at-point)
+			  ("C-c a" . lsp-execute-code-action))
+  :config
+  (lsp-enable-which-key-integration))
+
+(use-package company
+  :ensure t
+  :config
+  (company-keymap--unbind-quick-access company-active-map)
+  (setq company-idle-delay 0.1
+		company-minimum-prefix-length 1))
+
 ;; language stuff
 (use-package go-mode
   :ensure t)
 
 (use-package python-mode
   :ensure t
-  :hook ((python-ts-mode . eglot-ensure))
   :mode (("\\.py\\'" . python-ts-mode)))
+
+(use-package highlight-indent-guides
+  :ensure t
+  :hook (python-ts-mode . highlight-indent-guides-mode)
+  :config
+  (setq highlight-indent-guides-method 'character))
 
 (use-package markdown-mode
   :ensure t
   :mode ("README\\.md\\'" . gfm-mode)
   :init (setq markdown-command "multimarkdown"))
-
-;; from Gavin Freeborn
-(use-package corfu
-  :ensure t
-  ;; Optional customizations
-  :custom
-  (corfu-cycle t)                 ; Allows cycling through candidates
-  (corfu-auto t)                  ; Enable auto completion
-  (corfu-auto-prefix 2)
-  (corfu-auto-delay 0.3)
-  (corfu-popupinfo-delay '(0.5 . 0.2))
-  (corfu-preview-current 'insert) ; insert previewed candidate
-  (corfu-preselect 'prompt)
-  (corfu-on-exact-match nil)      ; Don't auto expand tempel snippets
-
-  ;; Optionally use TAB for cycling, default is `corfu-complete'.
-  :bind (:map corfu-map
-              ("M-SPC"      . corfu-insert-separator)
-              ("TAB"        . corfu-next)
-              ([tab]        . corfu-next)
-              ("S-TAB"      . corfu-previous)
-              ([backtab]    . corfu-previous)
-              ("S-<return>" . corfu-insert)
-              ("RET"        . nil))
-
-  :init
-  (global-corfu-mode)
-  (corfu-history-mode)
-  (corfu-popupinfo-mode) ; Popup completion info
-  :config
-  (add-hook 'eshell-mode-hook
-            (lambda () (setq-local corfu-quit-at-boundary t
-								   corfu-quit-no-match t
-								   corfu-auto nil)
-              (corfu-mode))))
