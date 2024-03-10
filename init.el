@@ -14,14 +14,14 @@
 
 (defun madie/set-font-faces ()
   (set-face-font 'default "JetBrainsMono Nerd Font-13")
-  (load-theme 'kanagawa t))
+  (load-theme 'kanagawa t)
+  (blink-cursor-mode))
 
 (setq make-backup-files nil)
 
 (if (daemonp)
     (add-hook 'after-make-frame-functions
 			  (lambda (frame)
-				(set-frame-parameter frame 'alpha-background 60)
 				(with-selected-frame frame
 				  (madie/set-font-faces))))
   (madie/set-font-faces))
@@ -104,7 +104,7 @@
   (setq evil-want-keybinding nil)
   (setq evil-want-C-u-scroll t)
   :config
-  (evil-mode 1)
+  ;; (evil-mode 1)
   (setq evil-insert-state-cursor `(hbar . 7)))
 
 (use-package evil-surround
@@ -136,21 +136,6 @@
 (use-package wgrep
   :ensure t)
 
-(use-package treemacs
-  :ensure t)
-
-(use-package treemacs-evil
-  :ensure t)
-
-(use-package lsp-mode
-  :ensure t
-  :bind (:map lsp-mode-map
-			  ("C-c l" . lsp-command-map)
-			  ("C-c d" . lsp-describe-thing-at-point)
-			  ("C-c a" . lsp-execute-code-action))
-  :config
-  (lsp-enable-which-key-integration))
-
 (use-package company
   :ensure t
   :config
@@ -169,43 +154,8 @@
   :bind (:map go-mode-map
 			  ("C-c f" . gofmt))
   :config
-  (require 'lsp-go)
-  (setq lsp-go-analyses
-		'((fieldalignment . t)
-		  (nilness        . t)
-		  (unusedwrite    . t)
-		  (unusedparams   . t)))
   (add-to-list 'exec-path "~/go/bin")
   (setq gofmt-command "goimports"))
-
-(use-package python-mode
-  :ensure t
-  :mode (("\\.py\\'" . python-ts-mode)))
-
-(use-package lsp-pyright
-  :ensure t
-  :hook (python-mode . (lambda ()
-                          (require 'lsp-pyright)
-                          (lsp-deferred))))
-
-(use-package lsp-metals
-  :ensure t
-  :custom
-  ;; You might set metals server options via -J arguments. This might not always work, for instance when
-  ;; metals is installed using nix. In this case you can use JAVA_TOOL_OPTIONS environment variable.
-  (lsp-metals-server-args '(;; Metals claims to support range formatting by default but it supports range
-                            ;; formatting of multiline strings only. You might want to disable it so that
-                            ;; emacs can use indentation provided by scala-mode.
-                            "-J-Dmetals.allow-multiline-string-formatting=off"
-                            ;; Enable unicode icons. But be warned that emacs might not render unicode
-                            ;; correctly in all cases.
-                            "-J-Dmetals.icons=unicode"))
-  ;; In case you want semantic highlighting. This also has to be enabled in lsp-mode using
-  ;; `lsp-semantic-tokens-enable' variable. Also you might want to disable highlighting of modifiers
-  ;; setting `lsp-semantic-tokens-apply-modifiers' to `nil' because metals sends `abstract' modifier
-  ;; which is mapped to `keyword' face.
-  (lsp-metals-enable-semantic-highlighting t)
-  :hook (scala-mode . lsp))
 
 (use-package highlight-indent-guides
   :ensure t
