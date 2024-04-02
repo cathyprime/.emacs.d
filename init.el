@@ -4,7 +4,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(lsp-metals lsp-pyright company lsp-mode treemacs-evil treemacs highlight-indent-guides markdown-mode python-mode go-mode which-key wgrep vterm undo-tree smex magit ligature evil-surround evil-commentary evil-collection autothemer)))
+   '(lua-mode company highlight-indent-guides markdown-mode python-mode go-mode which-key wgrep vterm smex magit ligature autothemer)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -97,41 +97,6 @@
 
 (use-package magit
   :ensure t)
-
-(use-package evil
-  :ensure t
-  :init
-  (setq evil-want-keybinding nil)
-  (setq evil-want-C-u-scroll t)
-  :config
-  ;; (evil-mode 1)
-  (setq evil-insert-state-cursor `(hbar . 7)))
-
-(use-package evil-surround
-  :after evil
-  :ensure t
-  :config
-  (global-evil-surround-mode 1))
-
-(use-package evil-commentary
-  :after evil
-  :ensure t
-  :config
-  (evil-commentary-mode))
-
-(use-package evil-collection
-  :after evil
-  :ensure t
-  :init
-  (evil-collection-init))
-
-(use-package undo-tree
-  :ensure t
-  :after evil
-  :diminish
-  :config
-  (evil-set-undo-system 'undo-tree)
-  (global-undo-tree-mode 1))
 
 (use-package wgrep
   :ensure t)
