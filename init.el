@@ -12,10 +12,12 @@
  ;; If there is more than one, they won't work right.
  )
 
-(defun madie/set-font-faces ()
-  (set-face-font 'default "JetBrainsMono Nerd Font-13")
+(defun magda/set-font-faces ()
+  (set-face-font 'default "JetBrainsMono Nerd Font-16")
   (load-theme 'kanagawa t)
   (blink-cursor-mode))
+
+(magda/set-font-faces)
 
 (setq make-backup-files nil)
 
@@ -23,8 +25,8 @@
     (add-hook 'after-make-frame-functions
 			  (lambda (frame)
 				(with-selected-frame frame
-				  (madie/set-font-faces))))
-  (madie/set-font-faces))
+				  (magda/set-font-faces))))
+  (magda/set-font-faces))
 
 (global-set-key (kbd "M-&") 'with-editor-async-shell-command)
 
