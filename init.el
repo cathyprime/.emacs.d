@@ -4,7 +4,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(lua-mode company highlight-indent-guides markdown-mode python-mode go-mode which-key wgrep vterm smex magit ligature autothemer)))
+   '(elcord haskell-mode racket-mode slime multiple-cursors lua-mode company highlight-indent-guides markdown-mode python-mode go-mode which-key wgrep vterm smex magit ligature autothemer)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -87,6 +87,14 @@
   :config
   (which-key-mode))
 
+(use-package multiple-cursors
+  :ensure t
+  :config
+  (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+  (global-set-key (kbd "C->") 'mc/mark-next-like-this)
+  (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+  (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this))
+ 
 (use-package ido
   :config
   (ido-mode 1)
@@ -134,3 +142,8 @@
   :ensure t
   :mode ("README\\.md\\'" . gfm-mode)
   :init (setq markdown-command "multimarkdown"))
+
+(use-package elcord
+  :ensure t
+  :config
+  (elcord-mode))
