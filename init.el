@@ -4,7 +4,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(elcord haskell-mode racket-mode slime multiple-cursors lua-mode company highlight-indent-guides markdown-mode python-mode go-mode which-key wgrep vterm smex magit ligature autothemer)))
+   '(elcord sly spotify haskell-mode racket-mode multiple-cursors lua-mode company highlight-indent-guides markdown-mode python-mode go-mode which-key wgrep vterm smex magit ligature autothemer)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -142,8 +142,3 @@
   :ensure t
   :mode ("README\\.md\\'" . gfm-mode)
   :init (setq markdown-command "multimarkdown"))
-
-(use-package elcord
-  :ensure t
-  :config
-  (elcord-mode))
