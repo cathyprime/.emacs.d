@@ -8,8 +8,8 @@
 (global-set-key (kbd "M-&") 'with-editor-async-shell-command)
 (global-set-key (kbd "C-x C-b") 'buffer-menu)
 
-(setq default-frame-alist '((undecorated . t)))
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
+(setq default-frame-alist '((undecorated . t)))
 (setq dired-isearch-filenames 'dwim)
 (setq display-line-numbers-type 'relative)
 (setq ring-bell-function 'ignore)
@@ -19,6 +19,7 @@
 (setq inhibit-startup-screen t)
 (setq search-whitespace-regexp ".*?")
 (setq-default tab-width 4)
+
 (blink-cursor-mode 0)
 (global-display-line-numbers-mode)
 (scroll-bar-mode 0)
@@ -31,9 +32,6 @@
 			 '("melpa" . "https://melpa.org/packages/") t)
 
 (package-initialize)
-
-(use-package vterm
-  :ensure t)
 
 (use-package which-key
   :ensure t
@@ -61,6 +59,9 @@
   (global-set-key (kbd "M-x") 'smex))
 
 (use-package magit
+  :ensure t)
+
+(use-package modus-themes
   :ensure t)
 
 (use-package wgrep
