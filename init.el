@@ -27,6 +27,12 @@
 
 (require 'package)
 (require 'use-package)
+
+(load "~/.emacs.d/simpc.el")
+
+(require 'simpc-mode)
+(add-to-list 'auto-mode-alist '("\\.[hc]\\(pp\\)?\\'" . simpc-mode))
+
 (add-to-list 'package-archives
 			 '("melpa" . "https://melpa.org/packages/") t)
 
