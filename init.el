@@ -1,7 +1,7 @@
 (setq custom-file "~/.emacs.d/custom.el")
 (load-file custom-file)
 
-(set-face-font 'default "Iosevka Nerd Font-18")
+(set-face-font 'default "Iosevka Nerd Font-16")
 (blink-cursor-mode)
 (setq make-backup-files nil)
 
