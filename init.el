@@ -9,7 +9,6 @@
 (global-set-key (kbd "C-x C-b") 'buffer-menu)
 
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
-(setq default-frame-alist '((undecorated . t)))
 (setq dired-isearch-filenames 'dwim)
 (setq display-line-numbers-type 'relative)
 (setq ring-bell-function 'ignore)
