@@ -1,5 +1,4 @@
 (setq custom-file "~/.emacs.d/custom.el")
-(load-file custom-file)
 
 (set-face-font 'default "Iosevka Nerd Font-16")
 (blink-cursor-mode)
@@ -71,3 +70,5 @@
 
 (use-package wgrep
   :ensure t)
+
+(load-file custom-file)
