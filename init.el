@@ -23,6 +23,7 @@
 (scroll-bar-mode 0)
 (tool-bar-mode 0)
 (menu-bar-mode 0)
+(show-paren-mode 1)
 
 (require 'package)
 (require 'use-package)
