@@ -3,7 +3,18 @@
 (add-to-list 'package-archives
 			 '("melpa" . "https://melpa.org/packages/"))
 
-(set-face-font 'default "Iosevka Nerd Font-16")
+(defun magda/fonts ()
+  (set-face-font 'default "Iosevka Nerd Font-16"))
+
+(if (daemonp)
+	(add-hook 'after-make-frame-functions
+			  (lambda (frame)
+				(select-frame frame)
+				(if (display-graphic-p frame)
+					(magda/fonts))))
+  (if (display-graphic-p)
+	  (magda/fonts)))
+
 (blink-cursor-mode)
 (setq make-backup-files nil)
 
