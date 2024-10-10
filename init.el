@@ -1,5 +1,8 @@
 (setq custom-file "~/.emacs.d/custom.el")
 
+(add-to-list 'package-archives
+			 '("melpa" . "https://melpa.org/packages/"))
+
 (set-face-font 'default "Iosevka Nerd Font-16")
 (blink-cursor-mode)
 (setq make-backup-files nil)
@@ -53,10 +56,10 @@
   (global-set-key (kbd "C-\"")        'mc/skip-to-next-like-this)
   (global-set-key (kbd "C-:")         'mc/skip-to-previous-like-this))
  
-(use-package ido
-  :config
-  (ido-mode 1)
-  (ido-everywhere 1))
+;; (use-package ido
+;;   :config
+;;   (ido-mode 1)
+;;   (ido-everywhere 1))
 
 (use-package smex
   :ensure t
@@ -71,5 +74,9 @@
 
 (use-package wgrep
   :ensure t)
+
+(use-package ivy
+  :ensure t
+  :config (ivy-mode 1))
 
 (load-file custom-file)
