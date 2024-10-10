@@ -8,7 +8,7 @@
 (setq make-backup-files nil)
 
 (global-set-key (kbd "M-&") 'with-editor-async-shell-command)
-(global-set-key (kbd "C-x C-b") 'buffer-menu)
+(global-set-key (kbd "C-x C-b") 'ibuffer)
 
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 (setq dired-isearch-filenames 'dwim)
