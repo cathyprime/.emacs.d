@@ -7,7 +7,7 @@
  '(custom-safe-themes
    '("99d1e29934b9e712651d29735dd8dcd431a651dfbe039df158aa973461af003e" default))
  '(package-selected-packages
-   '(ivy wgrep modus-themes magit smex multiple-cursors which-key))
+   '(move-text ivy wgrep modus-themes magit smex multiple-cursors which-key))
  '(show-trailing-whitespace t)
  '(warning-minimum-level :emergency))
 (custom-set-faces
