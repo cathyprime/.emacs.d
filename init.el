@@ -66,7 +66,7 @@
   (global-set-key (kbd "C-c C-<")     'mc/mark-all-like-this)
   (global-set-key (kbd "C-\"")        'mc/skip-to-next-like-this)
   (global-set-key (kbd "C-:")         'mc/skip-to-previous-like-this))
- 
+
 ;; (use-package ido
 ;;   :config
 ;;   (ido-mode 1)
