@@ -100,4 +100,7 @@
 (use-package ess-view-data
   :ensure t)
 
+(use-package nov
+  :ensure t)
+
 (load-file custom-file)
