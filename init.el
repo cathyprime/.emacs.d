@@ -72,6 +72,11 @@
   :config
   (global-set-key (kbd "M-x") 'smex))
 
+(use-package ido
+  :config
+  (ido-mode 1)
+  (ido-everywhere 1))
+
 (use-package magit
   :ensure t)
 
