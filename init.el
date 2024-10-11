@@ -91,4 +91,13 @@
   (global-set-key (kbd "M-p") 'move-text-up)
   (global-set-key (kbd "M-n") 'move-text-down))
 
+(use-package ess
+  :ensure t)
+
+(use-package ess-view
+  :ensure t)
+
+(use-package ess-view-data
+  :ensure t)
+
 (load-file custom-file)
