@@ -108,4 +108,11 @@
 (use-package nov
   :ensure t)
 
+(use-package god-mode
+  :ensure t
+  :init (setq god-mode-enable-function-key-translation nil)
+  :config
+  (global-set-key (kbd "<escape>") #'god-local-mode)
+  (define-key god-local-mode-map (kbd ".") #'repeat))
+
 (load-file custom-file)
