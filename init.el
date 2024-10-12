@@ -41,6 +41,11 @@
 
 (require 'package)
 (require 'use-package)
+(require 'ansi-color)
+
+(defun magda/colorize-buffer ()
+  (ansi-color-apply-on-region compilation-filter-start (point)))
+(add-hook 'compilation-filter-hook 'magda/colorize-buffer)
 
 (load "~/.emacs.d/simpc.el")
 
