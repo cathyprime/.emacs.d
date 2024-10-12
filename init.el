@@ -23,7 +23,7 @@
 
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 (setq dired-isearch-filenames 'dwim)
-(setq display-line-numbers-type 'relative)
+(setq display-line-numbers-type t)
 (setq ring-bell-function 'ignore)
 (setq split-width-threshold nil)
 (setq isearch-lazy-count t)
