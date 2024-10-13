@@ -6,6 +6,23 @@
 (defun magda/fonts ()
   (set-face-font 'default "Iosevka Nerd Font-16"))
 
+(defun magda/colorize-buffer ()
+  (ansi-color-apply-on-region compilation-filter-start (point)))
+
+(defun magda/duplicate-line ()
+  "Duplicate current line"
+  (interactive)
+  (let ((column (- (point) (point-at-bol)))
+        (line (let ((s (thing-at-point 'line t)))
+                (if s (string-remove-suffix "\n" s) ""))))
+    (move-end-of-line 1)
+    (newline)
+    (insert line)
+    (move-beginning-of-line 1)
+    (forward-char column)))
+
+(add-hook 'compilation-filter-hook 'magda/colorize-buffer)
+
 (if (daemonp)
 	(add-hook 'after-make-frame-functions
 			  (lambda (frame)
@@ -20,6 +37,8 @@
 
 (global-set-key (kbd "M-&") 'with-editor-async-shell-command)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
+(global-set-key (kbd "C-,") 'magda/duplicate-line)
+(global-unset-key (kbd "C-z"))
 
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 (setq dired-isearch-filenames 'dwim)
@@ -43,10 +62,6 @@
 (require 'use-package)
 (require 'ansi-color)
 
-(defun magda/colorize-buffer ()
-  (ansi-color-apply-on-region compilation-filter-start (point)))
-(add-hook 'compilation-filter-hook 'magda/colorize-buffer)
-
 (load "~/.emacs.d/simpc.el")
 
 (require 'simpc-mode)
@@ -65,12 +80,12 @@
 (use-package multiple-cursors
   :ensure t
   :config
-  (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
-  (global-set-key (kbd "C->")         'mc/mark-next-like-this)
-  (global-set-key (kbd "C-<")         'mc/mark-previous-like-this)
-  (global-set-key (kbd "C-c C-<")     'mc/mark-all-like-this)
-  (global-set-key (kbd "C-\"")        'mc/skip-to-next-like-this)
-  (global-set-key (kbd "C-:")         'mc/skip-to-previous-like-this))
+  (global-set-key (kbd "C-S-c")   'mc/edit-lines)
+  (global-set-key (kbd "C->")     'mc/mark-next-like-this)
+  (global-set-key (kbd "C-<")     'mc/mark-previous-like-this)
+  (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+  (global-set-key (kbd "C-\"")    'mc/skip-to-next-like-this)
+  (global-set-key (kbd "C-:")     'mc/skip-to-previous-like-this))
 
 (use-package smex
   :ensure t
@@ -114,5 +129,17 @@
   :config
   (global-set-key (kbd "<escape>") #'god-local-mode)
   (define-key god-local-mode-map (kbd ".") #'repeat))
+
+(use-package pdf-tools
+  :ensure t
+  :config
+  (pdf-tools-install))
+
+(use-package change-inner
+  :ensure t
+  :config
+  (global-set-key (kbd "M-i") 'change-inner)
+  (global-set-key (kbd "M-o") 'change-outer)
+  (global-set-key (kbd "C-=") 'er/expand-region))
 
 (load-file custom-file)
