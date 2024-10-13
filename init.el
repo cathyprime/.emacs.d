@@ -36,9 +36,11 @@
 (setq make-backup-files nil)
 
 (global-set-key (kbd "M-&") 'with-editor-async-shell-command)
-(global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key (kbd "C-,") 'magda/duplicate-line)
+(global-set-key (kbd "<f4>") 'ibuffer)
+
 (global-unset-key (kbd "C-z"))
+(global-unset-key (kbd "C-x C-b"))
 
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 (setq dired-isearch-filenames 'dwim)
