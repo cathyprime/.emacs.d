@@ -144,4 +144,7 @@
   (global-set-key (kbd "M-o") 'change-outer)
   (global-set-key (kbd "C-=") 'er/expand-region))
 
+(use-package auctex
+  :ensure t)
+
 (load-file custom-file)
