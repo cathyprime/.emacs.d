@@ -34,6 +34,7 @@
 
 (blink-cursor-mode)
 (setq make-backup-files nil)
+(setq create-lockfiles nil)
 
 (global-set-key (kbd "M-&") 'with-editor-async-shell-command)
 (global-set-key (kbd "C-,") 'magda/duplicate-line)
