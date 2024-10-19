@@ -7,7 +7,7 @@
  '(custom-safe-themes
    '("99d1e29934b9e712651d29735dd8dcd431a651dfbe039df158aa973461af003e" default))
  '(package-selected-packages
-   '(auctex change-inner pdf-tools god-mode rust-mode lua-mode nov ess-view-data ess-view ess move-text ivy wgrep modus-themes magit smex multiple-cursors which-key))
+   '(ess-R-data-view essgd auctex change-inner pdf-tools god-mode rust-mode lua-mode nov ess move-text ivy wgrep modus-themes magit smex multiple-cursors which-key))
  '(warning-minimum-level :emergency))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

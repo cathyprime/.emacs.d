@@ -1,7 +1,8 @@
 (setq custom-file "~/.emacs.d/custom.el")
 
 (add-to-list 'package-archives
-			 '("melpa" . "https://melpa.org/packages/"))
+			 '("melpa" . "https://melpa.org/packages/") t)
+(package-initialize)
 
 (defun magda/fonts ()
   (set-face-font 'default "Iosevka Nerd Font-16"))
@@ -71,11 +72,6 @@
 (require 'simpc-mode)
 (add-to-list 'auto-mode-alist '("\\.[hc]\\(pp\\)?\\'" . simpc-mode))
 
-(add-to-list 'package-archives
-			 '("melpa" . "https://melpa.org/packages/") t)
-
-(package-initialize)
-
 (use-package which-key
   :ensure t
   :config
@@ -118,10 +114,7 @@
 (use-package ess
   :ensure t)
 
-(use-package ess-view
-  :ensure t)
-
-(use-package ess-view-data
+(use-package essgd
   :ensure t)
 
 (use-package nov
