@@ -79,13 +79,12 @@
 
 (use-package multiple-cursors
   :ensure t
-  :config
-  (global-set-key (kbd "C-S-c")   'mc/edit-lines)
-  (global-set-key (kbd "C->")     'mc/mark-next-like-this)
-  (global-set-key (kbd "C-<")     'mc/mark-previous-like-this)
-  (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
-  (global-set-key (kbd "C-\"")    'mc/skip-to-next-like-this)
-  (global-set-key (kbd "C-:")     'mc/skip-to-previous-like-this))
+  :bind(("C-S-c" . 'mc/edit-lines)
+		("C->" . 'mc/mark-next-like-this)
+		("C-<" . 'mc/mark-previous-like-this)
+		("C-c C-<" . 'mc/mark-all-like-this)
+		("C-\"" . 'mc/skip-to-next-like-this)
+		("C-:" . 'mc/skip-to-previous-like-this)))
 
 (use-package smex
   :ensure t
