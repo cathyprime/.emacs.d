@@ -5,7 +5,7 @@
 (package-initialize)
 
 (defun magda/fonts ()
-  (set-face-font 'default "Iosevka Nerd Font-16"))
+  (set-face-font 'default "Iosevka-16"))
 
 (defun magda/colorize-buffer ()
   (ansi-color-apply-on-region compilation-filter-start (point)))
