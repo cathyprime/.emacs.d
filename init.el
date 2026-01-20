@@ -2,10 +2,11 @@
 
 (add-to-list 'package-archives
 			 '("melpa" . "https://melpa.org/packages/") t)
-(package-initialize)
 
 (defun magda/fonts ()
-  (set-face-font 'default "Iosevka-16"))
+  (interactive)
+  (set-face-font 'default "Iosevka NFM Medium")
+  (set-face-attribute 'default nil :height 200))
 
 (defun magda/colorize-buffer ()
   (ansi-color-apply-on-region compilation-filter-start (point)))
@@ -86,11 +87,6 @@
 		("C-\"" . 'mc/skip-to-next-like-this)
 		("C-:" . 'mc/skip-to-previous-like-this)))
 
-(use-package smex
-  :ensure t
-  :config
-  (global-set-key (kbd "M-x") 'smex))
-
 (use-package magit
   :ensure t)
 
@@ -100,9 +96,19 @@
 (use-package wgrep
   :ensure t)
 
-(use-package ivy
+(use-package vertico
   :ensure t
-  :config (ivy-mode 1))
+  :config (vertico-mode))
+
+(use-package marginalia
+  :ensure t
+  :config (marginalia-mode))
+
+(use-package orderless
+  :ensure t
+  :custom
+  (completion-styles '(orderless basic))
+  (completion-category-defaults nil))
 
 (use-package move-text
   :ensure t
@@ -111,16 +117,7 @@
   (global-set-key (kbd "M-<up>") 'move-text-up)
   (global-set-key (kbd "M-n") 'move-text-down)
   (global-set-key (kbd "M-<down>") 'move-text-down))
-
-(use-package ess
-  :ensure t)
-
-(use-package essgd
-  :ensure t)
-
-(use-package nov
-  :ensure t)
-
+ 
 (use-package meow
   :ensure t)
 (defun meow-setup ()
@@ -167,8 +164,8 @@
    '("c" . meow-change)
    '("d" . meow-delete)
    '("D" . meow-backward-delete)
-   '("e" . meow-next-word)
-   '("E" . meow-next-symbol)
+   '("w" . meow-next-word)
+   '("W" . meow-next-symbol)
    '("f" . meow-find)
    '("g" . meow-cancel-selection)
    '("G" . meow-grab)
@@ -196,7 +193,7 @@
    '("u" . meow-undo)
    '("U" . meow-undo-in-selection)
    '("v" . meow-visit)
-   '("w" . meow-mark-word)
+   '("*" . meow-mark-word)
    '("W" . meow-mark-symbol)
    '("x" . meow-line)
    '("X" . meow-goto-line)
@@ -212,3 +209,4 @@
 
 (load-file custom-file)
 (put 'narrow-to-region 'disabled nil)
+(load-theme 'modus-operandi-tinted t)
