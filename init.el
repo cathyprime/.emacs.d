@@ -25,6 +25,33 @@
 
 (add-hook 'compilation-filter-hook 'magda/colorize-buffer)
 
+(defun magda/compile-wrap-login-shell (orig-fun &rest args)
+  "Wrap the compile command in `bash --login -c` only for plink TRAMP projects.
+Does not modify `compile-command`, just passes a wrapped string to the original function."
+  (let ((cmd (or (car args) compile-command)))
+    (if (and default-directory
+             (string-prefix-p "/plink:" default-directory))
+        ;; Pass wrapped command to original function
+        (apply orig-fun
+               (list (format "bash --login -c %s"
+                             (shell-quote-argument cmd))))
+      ;; Otherwise, just call original function normally
+      (apply orig-fun args))))
+
+(defun magda/strip-login-shell-hook ()
+  "Strip leading `bash --login -c` from `compile-command` if in a plink TRAMP buffer."
+  ;; Only act if default-directory starts with /plink:Zone_
+  (when (and default-directory
+             (string-prefix-p "/plink:Zone_" default-directory))
+    (message "Running compile in TRAMP plink buffer: %s" default-directory)
+    ;; Strip bash wrapper if present
+    (when (and compile-command
+               (string-match "^bash --login -c \\(\"\\|'\\)\\(.*\\)\\1$" compile-command))
+      (setq compile-command (match-string 2 compile-command)))))
+
+(advice-add 'compile :around 'magda/compile-wrap-login-shell)
+(add-hook 'compilation-mode-hook 'magda/strip-login-shell-hook)
+
 (if (daemonp)
 	(add-hook 'after-make-frame-functions
 			  (lambda (frame)
@@ -41,6 +68,10 @@
 (global-set-key (kbd "M-&") 'with-editor-async-shell-command)
 (global-set-key (kbd "C-,") 'magda/duplicate-line)
 (global-set-key (kbd "<f4>") 'ibuffer)
+(global-set-key (kbd "C-c u") 'undo-only)
+(global-set-key (kbd "C-c r") 'undo-redo)
+(global-set-key (kbd "C-o") 'pop-global-mark)
+(global-set-key (kbd "C-c C-c") 'compile)
 
 (global-unset-key (kbd "C-z"))
 (global-unset-key (kbd "C-x C-b"))
@@ -77,10 +108,6 @@
   :ensure t
   :config
   (which-key-mode))
-
-(global-set-key (kbd "C-c u") 'undo-only)
-(global-set-key (kbd "C-c r") 'undo-redo)
-(global-set-key (kbd "C-o") 'pop-global-mark)
 
 (use-package multiple-cursors
   :ensure t
@@ -150,7 +177,8 @@
   (wrap-region-add-wrapper "\"" "\"")
   (wrap-region-add-wrapper "'" "'")
   (wrap-region-add-wrapper "*" "*"))
- 
+
 (load-file custom-file)
 (put 'narrow-to-region 'disabled nil)
 (load-theme 'modus-operandi-tinted t)
+
