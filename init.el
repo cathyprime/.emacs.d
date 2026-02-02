@@ -185,6 +185,7 @@ Does not modify `compile-command`, just passes a wrapped string to the original 
 (windmove-default-keybindings)
 (global-set-key (kbd "C-c o") 'delete-other-windows)
 (global-set-key (kbd "C-c q") 'delete-window)
+(global-set-key (kbd "C-c .") 'repeat)
 (global-set-key (kbd "C-c =") 'balance-windows)
 (global-set-key (kbd "C-c v") (lambda () (interactive) (split-window-right) (other-window 1)))
 (global-set-key (kbd "C-c s") (lambda () (interactive) (split-window-below) (other-window 1)))
