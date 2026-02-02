@@ -178,6 +178,15 @@ Does not modify `compile-command`, just passes a wrapped string to the original 
   (wrap-region-add-wrapper "'" "'")
   (wrap-region-add-wrapper "*" "*"))
 
+(use-package projectile
+  :ensure t
+  :config
+  (projectile-mode)
+  (setq projectile-project-search-path '("~/polygon/"))
+  (setq projectile-enable-cmake-presets t)
+  :bind-keymap
+  ("C-c p" . projectile-command-map))
+
 (load-file custom-file)
 (put 'narrow-to-region 'disabled nil)
 (load-theme 'modus-operandi-tinted t)

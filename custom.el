@@ -9,8 +9,8 @@
 	 default))
  '(package-selected-packages
    '(cmake-mode consult esxml ivy magit marginalia modus-themes move-text
-				multiple-cursors objed orderless vertico wgrep
-				wrap-region)))
+				multiple-cursors objed orderless projectile vertico
+				wgrep wrap-region)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
