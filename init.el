@@ -74,6 +74,7 @@ Does not modify `compile-command`, just passes a wrapped string to the original 
 
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 (setq dired-isearch-filenames 'dwim)
+(setq dired-listing-switches "-lah --group-directories-first --time-style=long-iso -v")
 (setq display-line-numbers-type t)
 (setq ring-bell-function 'ignore)
 (setq split-width-threshold nil)
@@ -98,7 +99,7 @@ Does not modify `compile-command`, just passes a wrapped string to the original 
 (load "~/.emacs.d/simpc.el")
 
 (require 'simpc-mode)
-(add-to-list 'auto-mode-alist '("\\.[hc]\\(pp\\)?\\'" . simpc-mode))
+(add-to-list 'auto-mode-alist '("\\.[hc]\\([hc]\\)?\\(pp\\)?\\'" . simpc-mode))
 
 (use-package which-key
   :ensure t
@@ -115,6 +116,9 @@ Does not modify `compile-command`, just passes a wrapped string to the original 
 		("C-:" . 'mc/skip-to-previous-like-this)))
 
 (use-package magit
+  :ensure t)
+
+(use-package cmake-mode
   :ensure t)
 
 (use-package modus-themes
@@ -148,7 +152,7 @@ Does not modify `compile-command`, just passes a wrapped string to the original 
 (use-package objed
   :ensure t
   :config
-  (global-set-key (kbd "M-o") 'objed-activate))
+  (global-set-key (kbd "C-.") 'objed-activate))
 
 (defun match-paren (arg)
   (interactive "p")
@@ -178,3 +182,9 @@ Does not modify `compile-command`, just passes a wrapped string to the original 
 (put 'narrow-to-region 'disabled nil)
 (load-theme 'modus-operandi-tinted t)
 
+(windmove-default-keybindings)
+(global-set-key (kbd "C-c o") 'delete-other-windows)
+(global-set-key (kbd "C-c q") 'delete-window)
+(global-set-key (kbd "C-c =") 'balance-windows)
+(global-set-key (kbd "C-c v") (lambda () (interactive) (split-window-right) (other-window 1)))
+(global-set-key (kbd "C-c s") (lambda () (interactive) (split-window-below) (other-window 1)))
