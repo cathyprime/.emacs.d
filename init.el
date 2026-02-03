@@ -24,6 +24,8 @@
     (forward-char column)))
 
 (add-hook 'compilation-filter-hook 'magda/colorize-buffer)
+(add-hook 'after-init-hook (lambda ()
+							 (load (locate-user-emacs-file "os.el") t)))
 
 (defun magda/compile-wrap-login-shell (orig-fun &rest args)
   "Wrap the compile command in `bash --login -c` only for plink TRAMP projects.
@@ -181,9 +183,9 @@ Does not modify `compile-command`, just passes a wrapped string to the original 
 (use-package projectile
   :ensure t
   :config
-  (projectile-mode)
   (setq projectile-project-search-path '("~/polygon/"))
   (setq projectile-enable-cmake-presets t)
+  (projectile-mode)
   :bind-keymap
   ("C-c p" . projectile-command-map))
 
