@@ -110,12 +110,13 @@ Does not modify `compile-command`, just passes a wrapped string to the original 
 
 (use-package multiple-cursors
   :ensure t
-  :bind(("C-S-c" . 'mc/edit-lines)
-		("C->" . 'mc/mark-next-like-this)
-		("C-<" . 'mc/mark-previous-like-this)
+  :bind(("C-S-c"  . 'mc/edit-lines)
+		("C->"     . 'mc/mark-next-like-this)
+		("C-<"     . 'mc/mark-previous-like-this)
 		("C-c C-<" . 'mc/mark-all-like-this)
-		("C-\"" . 'mc/skip-to-next-like-this)
-		("C-:" . 'mc/skip-to-previous-like-this)))
+		("C-\""    . 'mc/skip-to-next-like-this)
+		("C-:"     . 'mc/skip-to-previous-like-this)
+		("C-c |"   . 'mc/vertical-align)))
 
 (use-package magit
   :ensure t)
@@ -184,10 +185,30 @@ Does not modify `compile-command`, just passes a wrapped string to the original 
 (put 'narrow-to-region 'disabled nil)
 (load-theme 'modus-operandi-tinted t)
 
+(defun magda/move-window-to-edge (dir)
+  "Move current window to edge in direction DIR"
+  (let* ((buf (current-buffer)))
+    (delete-window (selected-window))
+    (let ((new-win
+           (pcase dir
+             ('left  (split-window (frame-root-window) nil 'left))
+             ('right (split-window (frame-root-window) nil 'right))
+             ('up    (split-window (frame-root-window) nil 'above))
+             ('down  (split-window (frame-root-window) nil 'below)))))
+      (set-window-buffer new-win buf)
+      (select-window new-win))))
+
 (windmove-default-keybindings)
-(global-set-key (kbd "C-c o") 'delete-other-windows)
-(global-set-key (kbd "C-c q") 'delete-window)
-(global-set-key (kbd "C-c .") 'repeat)
-(global-set-key (kbd "C-c =") 'balance-windows)
+(global-set-key (kbd "C-c <left>")  (lambda () (interactive) (magda/move-window-to-edge 'left)))
+(global-set-key (kbd "C-c <right>") (lambda () (interactive) (magda/move-window-to-edge 'right)))
+(global-set-key (kbd "C-c <up>")    (lambda () (interactive) (magda/move-window-to-edge 'up)))
+(global-set-key (kbd "C-c <down>")  (lambda () (interactive) (magda/move-window-to-edge 'down)))
+
+(global-set-key (kbd "C-c o")   'delete-other-windows)
+(global-set-key (kbd "C-c q")   'delete-window)
+(global-set-key (kbd "C-c .")   'repeat)
+(global-set-key (kbd "C-c j")   'join-line)
+(global-set-key (kbd "C-c =")   'balance-windows)
+(global-set-key (kbd "C-c C-=") 'indent-region)
 (global-set-key (kbd "C-c v") (lambda () (interactive) (split-window-right) (other-window 1)))
 (global-set-key (kbd "C-c s") (lambda () (interactive) (split-window-below) (other-window 1)))
